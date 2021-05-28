@@ -12,6 +12,7 @@ from rest_framework.decorators import api_view, permission_classes
 from django.http import JsonResponse
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication,TokenAuthentication
 from .models import User
+from django.views.generic import TemplateView
 # Create your views here.
 class UserList(generics.ListAPIView):
     queryset  = User.objects.all()
@@ -44,5 +45,9 @@ class RegisterView(generics.CreateAPIView):
 class UpdateProfileView(generics.RetrieveUpdateAPIView):
     queryset = User.objects.all()
     serializer_class = UpdateUserSerializer
+
+
+class Index(TemplateView):
+    template_name = "index.html"
 
     

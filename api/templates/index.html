@@ -1,0 +1,117 @@
+<h1 id="documentaci-n">Documentación</h1>
+<p>Base de datos y REST API capaz de gestionar un pequeño banco de usuarios.</p>
+<h4 id="acceso-a-la-versi-n-en-la-nube">Acceso a la versión en la nube</h4>
+<p><a href="https://apiandres.herokuapp.com/">https://apiandres.herokuapp.com/</a></p>
+<h2 id="instalaci-n">Instalación</h2>
+<h4 id="requisitos">Requisitos</h4>
+<p>Mysql</p>
+<h6 id="modificar-en-el-archivo-banco_usuario-settings-py-">Modificar en el archivo <code>banco_usuario/settings.py</code></h6>
+<pre><code class="lang-python">DATABASES = {
+        <span class="hljs-string">'default'</span>: {
+            <span class="hljs-string">'ENGINE'</span>: <span class="hljs-string">'django.db.backends.mysql'</span>,
+            <span class="hljs-string">'NAME'</span>: <span class="hljs-string">'apidb'</span>,
+            <span class="hljs-string">'USER'</span>: <span class="hljs-string">'root'</span>,
+            <span class="hljs-string">'PASSWORD'</span>: <span class="hljs-string">'*****'</span>,
+            <span class="hljs-string">'HOST'</span>: <span class="hljs-string">'127.0.0.1'</span>,
+            <span class="hljs-string">'PORT'</span>: <span class="hljs-string">'3306'</span>,
+        }
+    }
+</code></pre>
+<h4 id="ejecutar-la-api">Ejecutar la API</h4>
+<ol>
+<li>Clone el repositorio: <code>git clone https://github.com/acmejia727/api.git</code>.</li>
+<li><code>cd</code> entrar <code>banco_usuario</code></li>
+<li>Instalar <code>pip install virtualenv</code></li>
+<li>Crear un entorno con virtualenv ej: <code>venv</code>.</li>
+<li>Acceder al entorno virtual: <code>venv</code>. comando linux: <code>source venv/bin/activate</code> o Windows:<code>venv\Scripts\activate</code></li>
+<li>Ejecutar <code>pip install –r requirements.txt</code></li>
+<li>Ejecutar <code>python manager.py migrate</code></li>
+<li>Ejecutar <code>python manager.py runserver</code></li>
+</ol>
+<h2 id="acceso-api">Acceso API</h2>
+<p>También está habilitado la interfaz web para consultas al API, o puede acceder por medio de la URL usando Postman con la opciones from-data o usando JSON Content-Type</p>
+<h3 id="creaci-n-de-usuario">Creación de usuario</h3>
+<p>El sistema permite la creación de usuarios </p>
+<pre><code class="lang-node"><span class="hljs-symbol">'Content</span>-<span class="hljs-keyword">Type</span>': <span class="hljs-symbol">'application</span>/json',
+POST /api/registro/
+</code></pre>
+<h6 id="json">JSON</h6>
+<pre><code class="lang-json">{
+    <span class="hljs-attr">"username"</span>: <span class="hljs-string">"username"</span>,
+    <span class="hljs-attr">"password"</span>: <span class="hljs-string">"12345678"</span>,
+    <span class="hljs-attr">"password2"</span>: <span class="hljs-string">"12345678"</span>,
+    <span class="hljs-attr">"email"</span>: <span class="hljs-string">"andres@mail.com"</span>,
+    <span class="hljs-attr">"nombre"</span>: <span class="hljs-string">"andres"</span>,
+    <span class="hljs-attr">"apellido"</span>: <span class="hljs-string">"mejia"</span>,
+    <span class="hljs-attr">"cedula"</span>: <span class="hljs-number">123456</span>,
+    <span class="hljs-attr">"imagen"</span>: <span class="hljs-literal">null</span>,
+    <span class="hljs-attr">"entidad"</span>: <span class="hljs-string">"EPS"</span>
+}
+</code></pre>
+<h3 id="iniciar-sesi-n">Iniciar sesión</h3>
+<p>Puede iniciar sesión con correo y contraseña. Debe retornar la información del usuario y el JSON Web Token </p>
+<pre><code class="lang-node"><span class="hljs-symbol">'Content</span>-<span class="hljs-keyword">Type</span>': <span class="hljs-symbol">'application</span>/json',
+POST /api/login/
+</code></pre>
+<h6 id="json">JSON</h6>
+<pre><code class="lang-json">{
+    <span class="hljs-attr">"email"</span>:<span class="hljs-string">"andres@mail.com"</span>,
+    <span class="hljs-attr">"password"</span>:<span class="hljs-string">"12345678"</span>
+}
+</code></pre>
+<p>El API devolverá un key token:</p>
+<pre><code class="lang-json">{
+    <span class="hljs-attr">"key"</span>: <span class="hljs-string">"1a1c4fe345259d047f8b36990a25a14768c0f514"</span>
+}
+</code></pre>
+<h3 id="listar-usuarios">Listar usuarios</h3>
+<p>Para ingresar a las demás URL debe poseer el token, añada en el header Authorization y como valor ingrese el token. debe recordar debe poner la palabra Token y seguido el código</p>
+<pre><code class="lang-node"><span class="hljs-symbol">'Content</span>-<span class="hljs-type">Type'</span>: <span class="hljs-symbol">'application</span>/json', 
+<span class="hljs-symbol">'Authorization'</span>: <span class="hljs-symbol">'Token</span> <span class="hljs-number">2</span>a3de065381f08e29b38753929fa8ccc86d61932'
+<span class="hljs-type">GET</span> /api/usuario/
+</code></pre>
+<h6 id="json">JSON</h6>
+<pre><code class="lang-json">{
+    <span class="hljs-attr">"email"</span>:<span class="hljs-string">"andres@mail.com"</span>,
+    <span class="hljs-attr">"password"</span>:<span class="hljs-string">"12345678"</span>
+}
+</code></pre>
+<p>El API devolverá el listado de usuarios, adicional un campo llamado &#39;url&#39; el cual tiene la URL para acceder al Detalle de usuario :</p>
+<pre><code class="lang-json">{
+        <span class="hljs-string">"id"</span>: <span class="hljs-number">1</span>,
+        <span class="hljs-string">"nombre"</span>: <span class="hljs-string">""</span>,
+        <span class="hljs-string">"apellido"</span>: <span class="hljs-string">""</span>,
+        <span class="hljs-string">"cedula"</span>: <span class="hljs-literal">null</span>,
+        <span class="hljs-string">"email"</span>: <span class="hljs-string">"acmejia@gma.com"</span>,
+        <span class="hljs-string">"url"</span>: <span class="hljs-string">"http://127.0.0.1:8000/api/user/1/"</span>
+    },
+{
+</code></pre>
+<h6 id="filtro-de-busqueda">Filtro de busqueda</h6>
+<p>Usando el método GET podemos filtrar usando la variables nombre , apellido, cedula y email</p>
+<pre><code class="lang-node"><span class="hljs-symbol">'Content</span>-<span class="hljs-type">Type'</span>: <span class="hljs-symbol">'application</span>/json', 
+<span class="hljs-symbol">'Authorization'</span>: <span class="hljs-symbol">'Token</span> <span class="hljs-number">2</span>a3de065381f08e29b38753929fa8ccc86d61932'
+<span class="hljs-type">GET</span> /api/usuario/?nombre=andres&amp;apellido=mejia
+</code></pre>
+<h2 id="detalle-de-usuario">Detalle de usuario</h2>
+<p>El usuario podrá visualizar el detalle de algún usuario en específico usando el [ID] del usuario en la lista de usuarios. </p>
+<pre><code class="lang-node"><span class="hljs-string">'Content-Type'</span>: <span class="hljs-string">'application/json'</span>, 
+<span class="hljs-string">'Authorization'</span>: <span class="hljs-string">'Token 2a3de065381f08e29b38753929fa8ccc86d61932'</span>
+GET <span class="hljs-regexp">/api/u</span>suario<span class="hljs-regexp">/[ID]/</span>
+</code></pre>
+<h2 id="editar-usuario">Editar Usuario</h2>
+<p>El usuario podrá actualizar el detalle de algún usuario en específico usando el [ID] del usuario en la lista de usuarios. </p>
+<pre><code class="lang-node"><span class="hljs-string">'Content-Type'</span>: <span class="hljs-string">'application/json'</span>, 
+<span class="hljs-string">'Authorization'</span>: <span class="hljs-string">'Token 2a3de065381f08e29b38753929fa8ccc86d61932'</span>
+PATCH <span class="hljs-regexp">/api/u</span>suario<span class="hljs-regexp">/actualizar/</span>[ID]<span class="hljs-regexp">/</span>
+</code></pre>
+<pre><code class="lang-json">{
+    <span class="hljs-attr">"password"</span>: <span class="hljs-string">"123456"</span>,
+    <span class="hljs-attr">"nombre"</span>: <span class="hljs-string">"andres"</span>,
+    <span class="hljs-attr">"apellido"</span>: <span class="hljs-string">"mejia"</span>,
+    <span class="hljs-attr">"imagen"</span>: <span class="hljs-literal">null</span>,
+    <span class="hljs-attr">"entidad"</span>: <span class="hljs-string">"EPS"</span>
+}
+</code></pre>
+<h4 id="nota">Nota</h4>
+<p>Para subir las imágenes puede hacer uso de form-data</p>

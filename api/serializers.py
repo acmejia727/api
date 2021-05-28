@@ -80,13 +80,7 @@ class UpdateUserSerializer(serializers.ModelSerializer):
             'last_name': {'required': True},
         }
 
-    # def validate_email(self, value):
-    #     user = self.context['request'].user
-    #     if User.objects.exclude(pk=user.pk).filter(email=value).exists():
-    #         raise serializers.ValidationError({"email": "This email is already in use."})
-    #     return value
-
-    
+  
 
     def partial_update(self, instance, validated_data):
         kwargs['partial'] = True

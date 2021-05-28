@@ -11,7 +11,7 @@ https://apiandres.herokuapp.com/
 #### Requisitos
 Mysql
 
-###### Modificar en el archivo `banco_usuario/setting.py`
+###### Modificar en el archivo `banco_usuario/settings.py`
 
 
 
@@ -40,7 +40,7 @@ DATABASES = {
 
 ## Acceso API
 
-También está habilitado la interfaz web para consultas al API, o puede acceder por medio de la URL usando Postman por from-data o usando JSON Content-Type
+También está habilitado la interfaz web para consultas al API, o puede acceder por medio de la URL usando Postman con la opciones from-data o usando JSON Content-Type
 
 ### Creación de usuario
 
@@ -116,11 +116,11 @@ El API devolverá el listado de usuarios, adicional un campo llamado 'url' el cu
         "nombre": "",
         "apellido": "",
         "cedula": null,
-        "email": "acmejia.xpe@gmail.com",
+        "email": "acmejia@gma.com",
         "url": "http://127.0.0.1:8000/api/user/1/"
     },
 {
-///////////
+
 ```
 ###### Filtro de busqueda
 Usando el método GET podemos filtrar usando la variables nombre , apellido, cedula y email
@@ -160,4 +160,4 @@ PATCH /api/usuario/actualizar/[ID]/
 
 #### Nota
 
-Para subir las imágenes  puede hacer uso de form-data
+Para subir las imágenes puede hacer uso de form-data
