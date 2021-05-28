@@ -40,14 +40,13 @@ DATABASES = {
 
 ## Acceso API
 
-También está habilitado la interfaz web para consultas al API, o puede acceder por medio de la URL usando Postman con la opciones from-data o usando JSON Content-Type
+También está habilitado la interfaz web para consultas al API, o puede acceder por medio de la URL usando Postman con la opciones from-data o usando JSON
 
 ### Creación de usuario
 
 El sistema permite la creación de usuarios 
 
 ```node
-'Content-Type': 'application/json',
 POST /api/registro/
 ```
 
@@ -72,7 +71,6 @@ POST /api/registro/
 Puede iniciar sesión con correo y contraseña. Debe retornar la información del usuario y el JSON Web Token 
 
 ```node
-'Content-Type': 'application/json',
 POST /api/login/
 ```
 
@@ -96,7 +94,6 @@ El API devolverá un key token:
 Para ingresar a las demás URL debe poseer el token, añada en el header Authorization y como valor ingrese el token. debe recordar debe poner la palabra Token y seguido el código
 
 ```node
-'Content-Type': 'application/json', 
 'Authorization': 'Token 2a3de065381f08e29b38753929fa8ccc86d61932'
 GET /api/usuario/
 ```
@@ -112,14 +109,15 @@ GET /api/usuario/
 El API devolverá el listado de usuarios, adicional un campo llamado 'url' el cual tiene la URL para acceder al Detalle de usuario :
 ```json
 {
-        "id": 1,
-        "nombre": "",
-        "apellido": "",
-        "cedula": null,
-        "email": "acmejia@gma.com",
-        "url": "http://127.0.0.1:8000/api/user/1/"
-    },
-{
+    
+    "id": 1,
+    "nombre": "",
+    "apellido": "",
+    "cedula": null,
+    "email": "acmejia@gma.com",
+    "url": "http://127.0.0.1:8000/api/user/1/"
+    
+}
 
 ```
 ###### Filtro de busqueda
@@ -134,7 +132,6 @@ GET /api/usuario/?nombre=andres&apellido=mejia
 El usuario podrá visualizar el detalle de algún usuario en específico usando el [ID] del usuario en la lista de usuarios. 
 
 ```node
-'Content-Type': 'application/json', 
 'Authorization': 'Token 2a3de065381f08e29b38753929fa8ccc86d61932'
 GET /api/usuario/[ID]/
 ```
@@ -143,7 +140,6 @@ GET /api/usuario/[ID]/
 El usuario podrá actualizar el detalle de algún usuario en específico usando el [ID] del usuario en la lista de usuarios. 
 
 ```node
-'Content-Type': 'application/json', 
 'Authorization': 'Token 2a3de065381f08e29b38753929fa8ccc86d61932'
 PATCH /api/usuario/actualizar/[ID]/
 ```

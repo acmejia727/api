@@ -29,11 +29,10 @@
 <li>Ejecutar <code>python manager.py runserver</code></li>
 </ol>
 <h2 id="acceso-api">Acceso API</h2>
-<p>También está habilitado la interfaz web para consultas al API, o puede acceder por medio de la URL usando Postman con la opciones from-data o usando JSON Content-Type</p>
+<p>También está habilitado la interfaz web para consultas al API, o puede acceder por medio de la URL usando Postman con la opciones from-data o usando JSON</p>
 <h3 id="creaci-n-de-usuario">Creación de usuario</h3>
 <p>El sistema permite la creación de usuarios </p>
-<pre><code class="lang-node"><span class="hljs-symbol">'Content</span>-<span class="hljs-keyword">Type</span>': <span class="hljs-symbol">'application</span>/json',
-POST /api/registro/
+<pre><code class="lang-node">POST <span class="hljs-regexp">/api/</span>registro<span class="hljs-regexp">/</span>
 </code></pre>
 <h6 id="json">JSON</h6>
 <pre><code class="lang-json">{
@@ -50,8 +49,7 @@ POST /api/registro/
 </code></pre>
 <h3 id="iniciar-sesi-n">Iniciar sesión</h3>
 <p>Puede iniciar sesión con correo y contraseña. Debe retornar la información del usuario y el JSON Web Token </p>
-<pre><code class="lang-node"><span class="hljs-symbol">'Content</span>-<span class="hljs-keyword">Type</span>': <span class="hljs-symbol">'application</span>/json',
-POST /api/login/
+<pre><code class="lang-node">POST <span class="hljs-regexp">/api/</span>login<span class="hljs-regexp">/</span>
 </code></pre>
 <h6 id="json">JSON</h6>
 <pre><code class="lang-json">{
@@ -66,9 +64,8 @@ POST /api/login/
 </code></pre>
 <h3 id="listar-usuarios">Listar usuarios</h3>
 <p>Para ingresar a las demás URL debe poseer el token, añada en el header Authorization y como valor ingrese el token. debe recordar debe poner la palabra Token y seguido el código</p>
-<pre><code class="lang-node"><span class="hljs-symbol">'Content</span>-<span class="hljs-type">Type'</span>: <span class="hljs-symbol">'application</span>/json', 
-<span class="hljs-symbol">'Authorization'</span>: <span class="hljs-symbol">'Token</span> <span class="hljs-number">2</span>a3de065381f08e29b38753929fa8ccc86d61932'
-<span class="hljs-type">GET</span> /api/usuario/
+<pre><code class="lang-node"><span class="hljs-string">'Authorization'</span>: <span class="hljs-string">'Token 2a3de065381f08e29b38753929fa8ccc86d61932'</span>
+GET <span class="hljs-regexp">/api/u</span>suario<span class="hljs-regexp">/</span>
 </code></pre>
 <h6 id="json">JSON</h6>
 <pre><code class="lang-json">{
@@ -95,14 +92,12 @@ POST /api/login/
 </code></pre>
 <h2 id="detalle-de-usuario">Detalle de usuario</h2>
 <p>El usuario podrá visualizar el detalle de algún usuario en específico usando el [ID] del usuario en la lista de usuarios. </p>
-<pre><code class="lang-node"><span class="hljs-string">'Content-Type'</span>: <span class="hljs-string">'application/json'</span>, 
-<span class="hljs-string">'Authorization'</span>: <span class="hljs-string">'Token 2a3de065381f08e29b38753929fa8ccc86d61932'</span>
+<pre><code class="lang-node"><span class="hljs-string">'Authorization'</span>: <span class="hljs-string">'Token 2a3de065381f08e29b38753929fa8ccc86d61932'</span>
 GET <span class="hljs-regexp">/api/u</span>suario<span class="hljs-regexp">/[ID]/</span>
 </code></pre>
 <h2 id="editar-usuario">Editar Usuario</h2>
 <p>El usuario podrá actualizar el detalle de algún usuario en específico usando el [ID] del usuario en la lista de usuarios. </p>
-<pre><code class="lang-node"><span class="hljs-string">'Content-Type'</span>: <span class="hljs-string">'application/json'</span>, 
-<span class="hljs-string">'Authorization'</span>: <span class="hljs-string">'Token 2a3de065381f08e29b38753929fa8ccc86d61932'</span>
+<pre><code class="lang-node"><span class="hljs-string">'Authorization'</span>: <span class="hljs-string">'Token 2a3de065381f08e29b38753929fa8ccc86d61932'</span>
 PATCH <span class="hljs-regexp">/api/u</span>suario<span class="hljs-regexp">/actualizar/</span>[ID]<span class="hljs-regexp">/</span>
 </code></pre>
 <pre><code class="lang-json">{
