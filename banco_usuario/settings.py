@@ -23,7 +23,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 SECRET_KEY = 'django-insecure-6q9v-sup@w49+s*t)8^nxefip9q-%^)r%kp1n)04%g4xmd*_!u'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -79,6 +79,16 @@ WSGI_APPLICATION = 'banco_usuario.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+if DEBUG == True:
+    import dj_database_url
+    from decouple import config
+
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=config('JAWSDB_URL')
+        )
+    }
+
 DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
@@ -90,15 +100,7 @@ DATABASES = {
         }
     }
 
-if DEBUG == False:
-    import dj_database_url
-    from decouple import config
 
-    DATABASES = {
-        'default': dj_database_url.config(
-            default=config('JAWSDB_URL')
-        )
-    }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
