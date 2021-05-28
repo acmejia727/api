@@ -79,16 +79,6 @@ WSGI_APPLICATION = 'banco_usuario.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-if DEBUG == True:
-    import dj_database_url
-    from decouple import config
-
-    DATABASES = {
-        'default': dj_database_url.config(
-            default=config('JAWSDB_URL')
-        )
-    }
-
 DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
@@ -99,6 +89,18 @@ DATABASES = {
             'PORT': '3306',
         }
     }
+
+
+if DEBUG == True:
+    import dj_database_url
+    from decouple import config
+
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=config('JAWSDB_URL')
+        )
+    }
+
 
 
 
