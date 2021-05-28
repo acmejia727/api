@@ -88,13 +88,6 @@ class UpdateUserSerializer(serializers.ModelSerializer):
 
     
 
-    def update(self, instance, validated_data):
-        instance.first_name = validated_data['first_name']
-        instance.last_name = validated_data['last_name']     
-        instance.imagen = validated_data['imagen']
-        instance.entidad = validated_data['entidad']
-
-        user.set_password(validated_data['password'])
-        user.save()
-
-        return instance
+    def partial_update(self, instance, validated_data):
+        kwargs['partial'] = True
+        return self.update(request, *args, **kwargs)

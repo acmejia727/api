@@ -91,7 +91,7 @@ DATABASES = {
     }
 
 
-if DEBUG == True:
+try:
     import dj_database_url
     from decouple import config
 
@@ -100,7 +100,8 @@ if DEBUG == True:
             default=config('JAWSDB_URL')
         )
     }
-
+except:
+    pass
 
 
 
@@ -164,10 +165,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'api.User'
 
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
+AACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_EMAIL_REQUIRED = True   
 ACCOUNT_USERNAME_REQUIRED = False
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
