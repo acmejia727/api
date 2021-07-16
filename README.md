@@ -61,7 +61,7 @@ POST /api/registro/
     "nombre": "andres",
     "apellido": "mejia",
     "cedula": 123456,
-    "imagen": null,
+    "imagen": null, // no requerido
     "entidad": "EPS"
 }
 ```
@@ -149,7 +149,7 @@ PATCH /api/usuario/actualizar/[ID]/
     "password": "123456",
     "nombre": "andres",
     "apellido": "mejia",
-    "imagen": null,
+    "imagen": null, // no requerido
     "entidad": "EPS"
 }
 ```

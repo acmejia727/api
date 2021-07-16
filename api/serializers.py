@@ -41,10 +41,15 @@ class RegisterSerializer(serializers.ModelSerializer):
         fields = ('username', 'password', 'password2', 'email', 'nombre', 'apellido',"cedula","imagen","entidad")
         extra_kwargs = {
             'nombre': {'required': True},
-            'apellido': {'required': True}
+            'apellido': {'required': True},
+           # 'email': {'required': False}
         }
 
     def validate(self, attrs):
+        try:
+            email = attrs['imagen']
+        except KeyError:
+            attrs['imagen'] = ''
         if attrs['password'] != attrs['password2']:
             raise serializers.ValidationError({"password": "Los campos de la contraseña no coinciden."})
 
@@ -78,9 +83,17 @@ class UpdateUserSerializer(serializers.ModelSerializer):
         extra_kwargs = {
             'first_name': {'required': True},
             'last_name': {'required': True},
+            'imagen': {'required': False},
         }
 
-  
+    def validate(self, attrs):
+        try:
+            email = attrs['imagen']
+        except KeyError:
+            attrs['imagen'] = ''
+
+        return attrs
+
 
     def partial_update(self, instance, validated_data):
         kwargs['partial'] = True
